@@ -67,5 +67,5 @@ Have fun :)
 ```
 
 **Resources:**
-1. [](https://github.com/hfiref0x/UACME)
-2. [](https://www.greyhathacker.net/?p=796)
+1. [https://github.com/hfiref0x/UACME](https://github.com/hfiref0x/UACME)
+2. [https://www.greyhathacker.net/?p=796](https://www.greyhathacker.net/?p=796)
